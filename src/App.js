@@ -37,8 +37,31 @@ class App extends Component {
     icon2d: undefined,
     icon3d: undefined,
     icon4d: undefined,
-    icon5d: undefined
+    icon5d: undefined,
 
+    time1: undefined,
+    time2: undefined,
+    time3: undefined,
+
+    icon1h: undefined,
+    icon2h: undefined,
+    icon3h: undefined,
+
+    humidity1h: undefined,
+    humidity2h: undefined,
+    humidity3h: undefined,
+  
+    wind1h: undefined,
+    wind2h: undefined,
+    wind3h: undefined,
+
+
+    description1h:undefined,
+
+    description2h:undefined,
+
+    description3h:undefined,
+    error: ""
   }
 
 
@@ -83,6 +106,29 @@ class App extends Component {
                     icon3d: rsp.list["22"].weather["0"].id,
                     icon4d: rsp.list["30"].weather["0"].id,
                     icon5d: rsp.list["38"].weather["0"].id,
+
+                    wind1h: rsp.list[1].wind.speed,
+                    wind2h: rsp.list[2].wind.speed,
+                    wind3h: rsp.list[4].wind.speed,
+
+                    humidity1h: rsp.list[1].main.humidity,
+                    humidity2h: rsp.list[2].main.humidity,
+                    humidity3h: rsp.list[4].main.humidity,
+
+                    icon1h: rsp.list["1"].weather["0"].id,
+                    icon2h: rsp.list["2"].weather["0"].id,
+                    icon3h: rsp.list["3"].weather["0"].id,
+
+                    time1: rsp.list["1"].dt,
+                    time2: rsp.list["2"].dt,
+                    time3: rsp.list["3"].dt,
+
+                    temperature1h: Math.floor(rsp.list["1"].main.temp),
+                    temperature2h: Math.floor(rsp.list["2"].main.temp),
+                    temperature3h: Math.floor(rsp.list["3"].main.temp),
+                    description1h: rsp.list["1"].weather["0"].description,
+                    description2h: rsp.list["2"].weather["0"].description,
+                    description3h: rsp.list["3"].weather["0"].description,
                     error: ""
                   });
             }).catch(error => {
@@ -177,7 +223,22 @@ class App extends Component {
         icon3d: data.list["22"].weather["0"].id,
         icon4d: data.list["30"].weather["0"].id,
         icon5d: data.list["38"].weather["0"].id,
-     
+        
+        humidity1h: data.list[1].main.humidity,
+        humidity2h: data.list[2].main.humidity,
+        humidity3h: data.list[4].main.humidity,
+        wind1h: data.list[1].wind.speed,
+        wind2h: data.list[2].wind.speed,
+        wind3h: data.list[4].wind.speed,
+        icon1h: data.list["1"].weather["0"].id,
+        icon2h: data.list["2"].weather["0"].id,
+        icon3h: data.list["3"].weather["0"].id,
+        time1: data.list["1"].dt,
+        time2: data.list["2"].dt,
+        time3: data.list["3"].dt,
+        description1h: data.list["1"].weather["0"].description,
+        description2h: data.list["2"].weather["0"].description,
+        description3h: data.list["3"].weather["0"].description
       });
     } else {
       this.setState({
@@ -202,6 +263,28 @@ class App extends Component {
         icon3d: undefined,
         icon4d: undefined,
         icon5d: undefined,
+        time1: undefined,
+        time2: undefined,
+        time3: undefined,
+    
+        icon1h: undefined,
+        icon2h: undefined,
+        icon3h: undefined,
+    
+        humidity1h: undefined,
+        humidity2h: undefined,
+        humidity3h: undefined,
+      
+        wind1h: undefined,
+        wind2h: undefined,
+        wind3h: undefined,
+    
+    
+        description1h:undefined,
+    
+        description2h:undefined,
+    
+        description3h:undefined,
         error: "Please search for city and country"
       });
     }
@@ -226,6 +309,26 @@ class App extends Component {
           time ={this.state.time}
           sunrise ={this.state.sunrise}
           sunset={this.state.sunset}
+
+          time1={this.state.time1}
+          time2={this.state.time2}
+          time3={this.state.time3}
+          wind1h={this.state.wind1h}
+          wind2h={this.state.wind2h}
+          wind3h={this.state.wind3h}
+          humidity1h={this.state.humidity1h}
+          humidity2h={this.state.humidity2h}
+          humidity3h={this.state.humidity3h}
+          temperature1h={this.state.temperature1h}
+          temperature2h={this.state.temperature2h}
+          temperature3h={this.state.temperature3h}
+          icon1h={this.state.icon1h}
+          icon2h={this.state.icon2h}
+          icon3h={this.state.icon3h}
+
+          description1h={this.state.description1h}
+          description2h={this.state.description2h}
+          description3h={this.state.description3h}
         />
         <Week 
           temperature1d={this.state.temperature1d}
