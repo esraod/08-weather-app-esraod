@@ -26,7 +26,14 @@ class App extends Component {
     sunrise: undefined,
     sunset: undefined,
     error: "",
-    time: undefined
+    time: undefined,
+
+    temperature1d: undefined,
+    temperature2d: undefined,
+    temperature3d: undefined,
+    temperature4d: undefined,
+    temperature5d: undefined
+
   }
 
 
@@ -61,6 +68,11 @@ class App extends Component {
                     description: rsp.list["0"].weather["0"].description,
                     humidity: rsp.list[0].main.humidity,
                     wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
+                    temperature1d: Math.floor(rsp.list["6"].main.temp),
+                    temperature2d: Math.floor(rsp.list["14"].main.temp),
+                    temperature3d: Math.floor(rsp.list["22"].main.temp).toFixed(0),
+                    temperature4d: Math.floor(rsp.list["30"].main.temp),
+                    temperature5d: Math.floor(rsp.list["38"].main.temp),
                     error: ""
                   });
             }).catch(error => {
@@ -94,12 +106,12 @@ class App extends Component {
    
     fetch(API_WEATHER)
     .then(response => response.json())
-    .then(responseJson => {
-          console.log(responseJson);
-          console.log(responseJson.forecast);
+    .then(rsp => {
+          console.log(rsp);
+          console.log(rsp.forecast);
           this.setState({
-            sunrise: responseJson.sys.sunrise,
-            sunset: responseJson.sys.sunset,
+            sunrise: rsp.sys.sunrise,
+            sunset: rsp.sys.sunset,
           });
         })
         
@@ -138,7 +150,13 @@ class App extends Component {
           sunrise ={this.state.sunrise}
           sunset={this.state.sunset}
         />
-        <Week />
+        <Week 
+          temperature1d={this.state.temperature1d}
+          temperature2d={this.state.temperature2d}
+          temperature3d={this.state.temperature3d}
+          temperature4d={this.state.temperature4d}
+          temperature5d={this.state.temperature5d}
+        />
       </div>
     );
   }
