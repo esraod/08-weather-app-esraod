@@ -32,7 +32,12 @@ class App extends Component {
     temperature2d: undefined,
     temperature3d: undefined,
     temperature4d: undefined,
-    temperature5d: undefined
+    temperature5d: undefined,
+    icon1d: undefined,
+    icon2d: undefined,
+    icon3d: undefined,
+    icon4d: undefined,
+    icon5d: undefined
 
   }
 
@@ -73,6 +78,11 @@ class App extends Component {
                     temperature3d: Math.floor(rsp.list["22"].main.temp).toFixed(0),
                     temperature4d: Math.floor(rsp.list["30"].main.temp),
                     temperature5d: Math.floor(rsp.list["38"].main.temp),
+                    icon1d: rsp.list["6"].weather["0"].id,
+                    icon2d: rsp.list["14"].weather["0"].id,
+                    icon3d: rsp.list["22"].weather["0"].id,
+                    icon4d: rsp.list["30"].weather["0"].id,
+                    icon5d: rsp.list["38"].weather["0"].id,
                     error: ""
                   });
             }).catch(error => {
@@ -134,10 +144,77 @@ class App extends Component {
     );
   }
 
+  getWeather = async (e) => {
+    e.preventDefault();
+    const city = e.target.elements.city.value;
+    // const country = e.target.elements.country.value;
+    const getSun = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    const sun = await getSun.json();
+    const getDataBySearch = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
+    const data = await getDataBySearch.json();
+    // if (city && country)
+    // const getDataBySearch = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=metric`);
+  
+    if (city) {
+      this.setState({
+        city: data.city.name,
+        country: data.city.country,
+        temperature: Math.floor(data.list["0"].main.temp).toFixed(0),
+        time: data.list["0"].dt,
+        icon: data.list["0"].weather["0"].id,
+        description: data.list["0"].weather["0"].description,
+        humidity: data.list[0].main.humidity,
+        wind: data.list[0].wind.speed,
+        sunrise: sun.sys.sunrise,
+        sunset: sun.sys.sunset,
+        temperature1d: Math.floor(data.list["6"].main.temp),
+        temperature2d: Math.floor(data.list["14"].main.temp),
+        temperature3d: Math.floor(data.list["22"].main.temp).toFixed(0),
+        temperature4d: Math.floor(data.list["30"].main.temp),
+        temperature5d: Math.floor(data.list["38"].main.temp),
+        icon1d: data.list["6"].weather["0"].id,
+        icon2d: data.list["14"].weather["0"].id,
+        icon3d: data.list["22"].weather["0"].id,
+        icon4d: data.list["30"].weather["0"].id,
+        icon5d: data.list["38"].weather["0"].id,
+     
+      });
+    } else {
+      this.setState({
+        city: undefined,
+        country: undefined,
+        temperature: undefined,
+        icon: undefined,
+        description: undefined,
+        humidity: undefined,
+        wind: undefined,
+        sunrise: undefined,
+        sunset: undefined,
+        error: "",
+        time: undefined,
+        temperature1d: undefined,
+        temperature2d: undefined,
+        temperature3d: undefined,
+        temperature4d: undefined,
+        temperature5d: undefined,
+        icon1d: undefined,
+        icon2d: undefined,
+        icon3d: undefined,
+        icon4d: undefined,
+        icon5d: undefined,
+        error: "Please search for city and country"
+      });
+    }
+  }
+
+  reload = async (e) => {
+    window.location.reload();
+  }
+
   render() {
     return (
       <div>
-        <Search />
+        <Search getWeather={this.getWeather} reload={this.reload}/>
         <Today 
           city={this.state.city}
           country={this.state.country}
@@ -156,6 +233,11 @@ class App extends Component {
           temperature3d={this.state.temperature3d}
           temperature4d={this.state.temperature4d}
           temperature5d={this.state.temperature5d}
+          icon1d ={this.state.icon1d}
+          icon2d ={this.state.icon2d}
+          icon3d ={this.state.icon3d}
+          icon4d ={this.state.icon4d}
+          icon5d ={this.state.icon5d}
         />
       </div>
     );

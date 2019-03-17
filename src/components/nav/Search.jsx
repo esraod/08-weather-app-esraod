@@ -12,7 +12,7 @@ const Form = props => (
             <FontAwesomeIcon icon="search" />
           </div>
         </button>
-        <button name="location">
+        <button name="location" onClick={props.reload}>
           <div>
             <FontAwesomeIcon icon="location-arrow" />
           </div>
