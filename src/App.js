@@ -14,12 +14,13 @@ library.add(faSearch,faFrown,faTint,faWind, faLocationArrow, faSun,faCircle)
 class App extends Component {
 
 
+
   render() {
     return (
       <div>
         <Search />
-        {/* <Today />
-        <Week /> */}
+        <Today />
+        {/* <Week /> */}
       </div>
     );
   }
