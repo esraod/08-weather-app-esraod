@@ -6,7 +6,7 @@ import Search from './components/nav/Search'
 import Today from './components/weather-card/Today'
 import Week from './components/weather-card/Week'
 import Scroll from './components/nav/Scroll'
-
+import moment from 'moment'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faSearch, faFrown,faTint,faWind, faLocationArrow, faSun,faCircle} from '@fortawesome/free-solid-svg-icons'
@@ -26,8 +26,8 @@ class App extends Component {
     wind: undefined,
     sunrise: undefined,
     sunset: undefined,
-    error: "",
     time: undefined,
+    dayorn: undefined,
 
     temperature1d: undefined,
     temperature2d: undefined,
@@ -43,25 +43,20 @@ class App extends Component {
     time1: undefined,
     time2: undefined,
     time3: undefined,
-
     icon1h: undefined,
     icon2h: undefined,
     icon3h: undefined,
-
     humidity1h: undefined,
     humidity2h: undefined,
     humidity3h: undefined,
-  
     wind1h: undefined,
     wind2h: undefined,
     wind3h: undefined,
-
-
+  
     description1h:undefined,
-
     description2h:undefined,
-
     description3h:undefined,
+
     error: ""
   }
 
@@ -72,7 +67,7 @@ class App extends Component {
   }
 
 
-  getLocation = async (e) =>{
+  getLocation = async (e) => {
     this.watchId = navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -80,74 +75,81 @@ class App extends Component {
           longitude: position.coords.longitude,
           error: null
         },
-        ()=>{
-          var lat = `${this.state.latitude}`;
-          var lon = `${this.state.longitude}`;
-          let API_WEATHER = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-          fetch(API_WEATHER)
-            .then(response => response.json())
-            .then(rsp => {
-                  console.log(rsp);
-                  this.setState({
-                    city: rsp.city.name,
-                    country: rsp.city.country,
-                    temperature: Math.floor(rsp.list["0"].main.temp).toFixed(0),
-                    time: rsp.list["0"].dt,
-                    icon: rsp.list["0"].weather["0"].id,
-                    description: rsp.list["0"].weather["0"].description,
-                    humidity: rsp.list[0].main.humidity,
-                    wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
-                    temperature1d: Math.floor(rsp.list["6"].main.temp),
-                    temperature2d: Math.floor(rsp.list["14"].main.temp),
-                    temperature3d: Math.floor(rsp.list["22"].main.temp).toFixed(0),
-                    temperature4d: Math.floor(rsp.list["30"].main.temp),
-                    temperature5d: Math.floor(rsp.list["38"].main.temp),
-                    icon1d: rsp.list["6"].weather["0"].id,
-                    icon2d: rsp.list["14"].weather["0"].id,
-                    icon3d: rsp.list["22"].weather["0"].id,
-                    icon4d: rsp.list["30"].weather["0"].id,
-                    icon5d: rsp.list["38"].weather["0"].id,
+          () => {
+            var lat = `${this.state.latitude}`;
+            var lon = `${this.state.longitude}`;
+            let API_WEATHER = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+            fetch(API_WEATHER)
+              .then(response => response.json())
+              .then(rsp => {
+                console.log(rsp);
+                this.setState({
+                  city: rsp.city.name,
+                  country: rsp.city.country,
+                  temperature: Math.floor(rsp.list[0].main.temp).toFixed(0),
+                  time: rsp.list[0].dt,
+                  icon: rsp.list[0].weather[0].id,
+                  description: rsp.list[0].weather[0].description,
+                  humidity: rsp.list[0].main.humidity,
+                  wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
+                  dayorn: rsp.list[0].sys.pod,
 
-                    wind1h: rsp.list[1].wind.speed,
-                    wind2h: rsp.list[2].wind.speed,
-                    wind3h: rsp.list[4].wind.speed,
+                  temperature1d: Math.floor(rsp.list[6].main.temp).toFixed(0),
+                  temperature2d: Math.floor(rsp.list[14].main.temp).toFixed(0),
+                  temperature3d: Math.floor(rsp.list[22].main.temp).toFixed(0),
+                  temperature4d: Math.floor(rsp.list[30].main.temp).toFixed(0),
+                  temperature5d: Math.floor(rsp.list[38].main.temp).toFixed(0),
+                  icon1d: rsp.list[6].weather[0].id,
+                  icon2d: rsp.list[14].weather[0].id,
+                  icon3d: rsp.list[22].weather[0].id,
+                  icon4d: rsp.list[30].weather[0].id,
+                  icon5d: rsp.list[38].weather[0].id,
+                  wday1: moment.unix(rsp.list[6].dt).format('dd'),
+                  wday2: moment.unix(rsp.list[14].dt).format('dd'),
+                  wday3: moment.unix(rsp.list[22].dt).format('dd'),
+                  wday4: moment.unix(rsp.list[30].dt).format('dd'),
+                  wday5: moment.unix(rsp.list[38].dt).format('dd'),
 
-                    humidity1h: rsp.list[1].main.humidity,
-                    humidity2h: rsp.list[2].main.humidity,
-                    humidity3h: rsp.list[4].main.humidity,
+                  wind1h: rsp.list[1].wind.speed,
+                  wind2h: rsp.list[2].wind.speed,
+                  wind3h: rsp.list[4].wind.speed,
 
-                    icon1h: rsp.list["1"].weather["0"].id,
-                    icon2h: rsp.list["2"].weather["0"].id,
-                    icon3h: rsp.list["3"].weather["0"].id,
+                  humidity1h: rsp.list[1].main.humidity,
+                  humidity2h: rsp.list[2].main.humidity,
+                  humidity3h: rsp.list[4].main.humidity,
 
-                    time1: rsp.list["1"].dt,
-                    time2: rsp.list["2"].dt,
-                    time3: rsp.list["3"].dt,
+                  icon1h: rsp.list[1].weather[0].id,
+                  icon2h: rsp.list[2].weather[0].id,
+                  icon3h: rsp.list[3].weather[0].id,
 
-                    temperature1h: Math.floor(rsp.list["1"].main.temp),
-                    temperature2h: Math.floor(rsp.list["2"].main.temp),
-                    temperature3h: Math.floor(rsp.list["3"].main.temp),
-                    description1h: rsp.list["1"].weather["0"].description,
-                    description2h: rsp.list["2"].weather["0"].description,
-                    description3h: rsp.list["3"].weather["0"].description,
-                    error: ""
-                  });
-            }).catch(error => {
-                  console.log(error);
+                  time1: rsp.list[1].dt,
+                  time2: rsp.list[2].dt,
+                  time3: rsp.list[3].dt,
+
+                  temperature1h: Math.floor(rsp.list[1].main.temp),
+                  temperature2h: Math.floor(rsp.list[2].main.temp),
+                  temperature3h: Math.floor(rsp.list[3].main.temp),
+                  description1h: rsp.list[1].weather[0].description,
+                  description2h: rsp.list[2].weather[0].description,
+                  description3h: rsp.list[3].weather[0].description,
+                  error: ""
+                });
+              }).catch(error => {
+                console.log(error);
               });
-            });
-              },
-                error => this.setState({ error: error.message }),
-                {
-                  enableHighAccuracy: true,
-                  timeout: 20000,
-                  maximumAge: 1000,
-                  distanceFilter: 5
-                }
+          });
+      },
+      error => this.setState({ error: "Could not find your location, Try seaching." }),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+        distanceFilter: 5
+      }
     );
   } 
 
-  getLocationSun = async (e) =>{
+  getLocationSun = async (e) => {
 
     this.watchId = navigator.geolocation.getCurrentPosition(
       position => {
@@ -156,31 +158,29 @@ class App extends Component {
           longitude: position.coords.longitude,
           error: null
         },
-        ()=>{
-          var lat = `${this.state.latitude}`;
-          var lon = `${this.state.longitude}`;
-          let API_WEATHER = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-   
-    fetch(API_WEATHER)
-    .then(response => response.json())
-    .then(rsp => {
-          console.log(rsp);
-          console.log(rsp.forecast);
-          this.setState({
-            sunrise: rsp.sys.sunrise,
-            sunset: rsp.sys.sunset,
+          () => {
+            var lat = `${this.state.latitude}`;
+            var lon = `${this.state.longitude}`;
+            let API_WEATHER = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+
+            fetch(API_WEATHER)
+              .then(response => response.json())
+              .then(rsp => {
+                console.log(rsp);
+                console.log(rsp.forecast);
+                this.setState({
+                  sunrise: rsp.sys.sunrise,
+                  sunset: rsp.sys.sunset,
+                });
+              })
+              .catch(error => {
+                console.log(error);
+              });
+
           });
-        })
-        
-  
-        .catch(error => {
-          console.log(error);
-        });
-       
-      });
       },
-  
-      
+
+
       error => this.setState({ error: error.message }),
       {
         enableHighAccuracy: true,
@@ -206,40 +206,41 @@ class App extends Component {
       this.setState({
         city: data.city.name,
         country: data.city.country,
-        temperature: Math.floor(data.list["0"].main.temp).toFixed(0),
-        time: data.list["0"].dt,
-        icon: data.list["0"].weather["0"].id,
-        description: data.list["0"].weather["0"].description,
+        temperature: Math.floor(data.list[0].main.temp).toFixed(0),
+        time: data.list[0].dt,
+        icon: data.list[0].weather[0].id,
+        description: data.list[0].weather[0].description,
         humidity: data.list[0].main.humidity,
         wind: data.list[0].wind.speed,
         sunrise: sun.sys.sunrise,
         sunset: sun.sys.sunset,
-        temperature1d: Math.floor(data.list["6"].main.temp),
-        temperature2d: Math.floor(data.list["14"].main.temp),
-        temperature3d: Math.floor(data.list["22"].main.temp).toFixed(0),
-        temperature4d: Math.floor(data.list["30"].main.temp),
-        temperature5d: Math.floor(data.list["38"].main.temp),
-        icon1d: data.list["6"].weather["0"].id,
-        icon2d: data.list["14"].weather["0"].id,
-        icon3d: data.list["22"].weather["0"].id,
-        icon4d: data.list["30"].weather["0"].id,
-        icon5d: data.list["38"].weather["0"].id,
-        
+        temperature1d: Math.floor(data.list[6].main.temp).toFixed(0),
+        temperature2d: Math.floor(data.list[14].main.temp).toFixed(0),
+        temperature3d: Math.floor(data.list[22].main.temp).toFixed(0),
+        temperature4d: Math.floor(data.list[30].main.temp).toFixed(0),
+        temperature5d: Math.floor(data.list[38].main.temp).toFixed(0),
+        icon1d: data.list[6].weather[0].id,
+        icon2d: data.list[14].weather[0].id,
+        icon3d: data.list[22].weather[0].id,
+        icon4d: data.list[30].weather[0].id,
+        icon5d: data.list[38].weather[0].id,
+        dayorn: data.list[0].sys.pod,
         humidity1h: data.list[1].main.humidity,
         humidity2h: data.list[2].main.humidity,
         humidity3h: data.list[4].main.humidity,
         wind1h: data.list[1].wind.speed,
         wind2h: data.list[2].wind.speed,
         wind3h: data.list[4].wind.speed,
-        icon1h: data.list["1"].weather["0"].id,
-        icon2h: data.list["2"].weather["0"].id,
-        icon3h: data.list["3"].weather["0"].id,
-        time1: data.list["1"].dt,
-        time2: data.list["2"].dt,
-        time3: data.list["3"].dt,
-        description1h: data.list["1"].weather["0"].description,
-        description2h: data.list["2"].weather["0"].description,
-        description3h: data.list["3"].weather["0"].description
+        icon1h: data.list[1].weather[0].id,
+        icon2h: data.list[2].weather[0].id,
+        icon3h: data.list[3].weather[0].id,
+        time1: data.list[1].dt,
+        time2: data.list[2].dt,
+        time3: data.list[3].dt,
+        description1h: data.list[1].weather[0].description,
+        description2h: data.list[2].weather[0].description,
+        description3h: data.list[3].weather[0].description,
+        error: undefined
       });
     } else {
       this.setState({
@@ -252,7 +253,6 @@ class App extends Component {
         wind: undefined,
         sunrise: undefined,
         sunset: undefined,
-        error: "",
         time: undefined,
         temperature1d: undefined,
         temperature2d: undefined,
@@ -268,6 +268,7 @@ class App extends Component {
         time2: undefined,
         time3: undefined,
     
+        dayorn: undefined,
         icon1h: undefined,
         icon2h: undefined,
         icon3h: undefined,
@@ -279,14 +280,11 @@ class App extends Component {
         wind1h: undefined,
         wind2h: undefined,
         wind3h: undefined,
-    
-    
         description1h:undefined,
-    
         description2h:undefined,
-    
         description3h:undefined,
-        error: "Please search for city and country"
+
+        error: "Please search for a city."
       });
     }
   }
@@ -297,18 +295,18 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Search getWeather={this.getWeather} reload={this.reload}/>
-        <Today 
+      <div id={this.state.dayorn}>
+        <Search getWeather={this.getWeather} reload={this.reload} />
+        <Today
           city={this.state.city}
           country={this.state.country}
-          temperature={this.state.temperature} 
+          temperature={this.state.temperature}
           icon={this.state.icon}
           description={this.state.description}
           humidity={this.state.humidity}
           wind={this.state.wind}
-          time ={this.state.time}
-          sunrise ={this.state.sunrise}
+          time={this.state.time}
+          sunrise={this.state.sunrise}
           sunset={this.state.sunset}
 
           time1={this.state.time1}
@@ -330,20 +328,31 @@ class App extends Component {
           description1h={this.state.description1h}
           description2h={this.state.description2h}
           description3h={this.state.description3h}
+          error={this.state.error}
         />
-        <Scroll />
-        <Week 
+
+        <Scroll
+        error={this.state.error}
+        />
+
+        <Week
           temperature1d={this.state.temperature1d}
           temperature2d={this.state.temperature2d}
           temperature3d={this.state.temperature3d}
           temperature4d={this.state.temperature4d}
           temperature5d={this.state.temperature5d}
-          icon1d ={this.state.icon1d}
-          icon2d ={this.state.icon2d}
-          icon3d ={this.state.icon3d}
-          icon4d ={this.state.icon4d}
-          icon5d ={this.state.icon5d}
+          icon1d={this.state.icon1d}
+          icon2d={this.state.icon2d}
+          icon3d={this.state.icon3d}
+          icon4d={this.state.icon4d}
+          icon5d={this.state.icon5d}
+          wday1={this.state.wday1}
+          wday2={this.state.wday2}
+          wday3={this.state.wday3}
+          wday4={this.state.wday4}
+          wday5={this.state.wday5}
         />
+
       </div>
     );
   }
