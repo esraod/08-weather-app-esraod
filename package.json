@@ -10,7 +10,8 @@
     "npm": "^6.9.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-scripts": "2.1.8",
+    "react-timestamp": "^4.4.0"
   },
   "scripts": {
     "start": "react-scripts start",

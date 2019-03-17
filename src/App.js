@@ -32,6 +32,7 @@ class App extends Component {
 
   componentDidMount() {  
     this.getLocation(); 
+    this.getLocationSun();
   }
 
 
@@ -62,11 +63,10 @@ class App extends Component {
                     wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
                     error: ""
                   });
-                })
-                .catch(error => {
+            }).catch(error => {
                   console.log(error);
-                });
               });
+            });
               },
                 error => this.setState({ error: error.message }),
                 {
@@ -75,8 +75,52 @@ class App extends Component {
                   maximumAge: 1000,
                   distanceFilter: 5
                 }
-              );
-            } 
+    );
+  } 
+
+  getLocationSun = async (e) =>{
+
+    this.watchId = navigator.geolocation.getCurrentPosition(
+      position => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null
+        },
+        ()=>{
+          var lat = `${this.state.latitude}`;
+          var lon = `${this.state.longitude}`;
+          let API_WEATHER = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+   
+    fetch(API_WEATHER)
+    .then(response => response.json())
+    .then(responseJson => {
+          console.log(responseJson);
+          console.log(responseJson.forecast);
+          this.setState({
+            sunrise: responseJson.sys.sunrise,
+            sunset: responseJson.sys.sunset,
+          });
+        })
+        
+  
+        .catch(error => {
+          console.log(error);
+        });
+       
+      });
+      },
+  
+      
+      error => this.setState({ error: error.message }),
+      {
+        enableHighAccuracy: true,
+        timeout: 20000,
+        maximumAge: 1000,
+        distanceFilter: 5
+      }
+    );
+  }
 
   render() {
     return (
@@ -91,6 +135,8 @@ class App extends Component {
           humidity={this.state.humidity}
           wind={this.state.wind}
           time ={this.state.time}
+          sunrise ={this.state.sunrise}
+          sunset={this.state.sunset}
         />
         <Week />
       </div>

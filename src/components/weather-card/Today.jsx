@@ -2,6 +2,8 @@ import React from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+const Timestamp = require('react-timestamp');
+
 const Today = props => (
 
     <div className="weather-content">
@@ -9,7 +11,7 @@ const Today = props => (
         <div className="flex-one">
             {props.city && props.country && props.time && (
             <div className="weather-item">
-                <p className="weather-value time">{ props.time }</p>
+                <p className="weather-value time"><Timestamp utc={false}time={ props.time } format='time' /></p>
                 <p className="weather-value city">{ props.city }</p>
                 <p className="weather-value country">{ props.country }</p>
             </div>
@@ -35,27 +37,30 @@ const Today = props => (
         </div>
 
         <div className="flex-three">
-            
-            <div className="weather-item-small">
-            <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
-            <div className="wind">6am</div>
-            </div>
-            {props.wind && (
-            <div className="weather-item-small">
-            <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
-            <div className="wind">{ props.wind }m/s</div>
-            </div>
-             )}
-            {props.humidity && (
-            <div className="weather-item-small">
-            <FontAwesomeIcon className="icon-small-desc" icon="tint" />
-            <div className="wind">{ props.humidity }% </div>
+            {props.sunrise&& (
+                <div className="weather-item-small">
+                <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
+                <div className="wind"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
             </div>
             )}
+            {props.wind && (
             <div className="weather-item-small">
-            <FontAwesomeIcon className="icon-small-desc" icon="sun" />
-            <div className="wind">6pm</div>
+                <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
+                <div className="wind">{ props.wind }m/s</div>
             </div>
+            )}
+            {props.humidity && (
+            <div className="weather-item-small">
+                <FontAwesomeIcon className="icon-small-desc" icon="tint" />
+                <div className="wind">{ props.humidity }% </div>
+            </div>
+            )}
+            {props.sunset&& (
+            <div className="weather-item-small">
+                <FontAwesomeIcon className="icon-small-desc" icon="sun" />
+                <div className="wind"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
+            </div>
+            )}
           
         </div>
 
