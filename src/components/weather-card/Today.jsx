@@ -1,8 +1,9 @@
 import React from "react";
-
+import WeatherIcon from "react-icons-weather";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Timestamp = require('react-timestamp');
+
 
 const Today = props => (
 
@@ -25,9 +26,17 @@ const Today = props => (
 
         <div className="flex-two">
             <div className="weather-item">
+                {props.icon && (
                 <div className="weather-value icon">
-                <FontAwesomeIcon className="icon" icon="sun" />{" "}
+                    <WeatherIcon
+                    name="owm"
+                    iconId={`${props.icon}`}
+                    flip="horizontal"
+                    rotate="90"
+                    style={{ lineHeight: 1.45 }}
+                    />
                 </div>
+                )}
             </div>
             {props.description  && ( 
             <div className="weather-item">
