@@ -5,6 +5,7 @@ import { API_KEY } from './api/Key'
 import Search from './components/nav/Search'
 import Today from './components/weather-card/Today'
 import Week from './components/weather-card/Week'
+import Scroll from './components/nav/Scroll'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -330,6 +331,7 @@ class App extends Component {
           description2h={this.state.description2h}
           description3h={this.state.description3h}
         />
+        <Scroll />
         <Week 
           temperature1d={this.state.temperature1d}
           temperature2d={this.state.temperature2d}

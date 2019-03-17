@@ -8,7 +8,7 @@ const Timestamp = require('react-timestamp');
 const Today = props => (
 
     <div className="weather-content">
-        <div className="hour">
+        <div className="hour" id="hour">
             <div className="flex-one">
                 {props.city && props.country && props.time && (
                 <div className="weather-item">
@@ -74,7 +74,7 @@ const Today = props => (
             </div>
         </div>
 
-            <div className="hour1">
+            <div className="hour1" id="hour1">
             <div className="flex-one">
                 {props.city && props.country && props.time1 && (
                 <div className="weather-item">
@@ -140,7 +140,7 @@ const Today = props => (
             </div>
         </div>
 
-             <div className="hour2">
+             <div className="hour2" id="hour2">
             <div className="flex-one">
                 {props.city && props.country && props.time2h && (
                 <div className="weather-item">
@@ -206,7 +206,7 @@ const Today = props => (
             </div>
         </div>            
    
-        <div className="hour3">
+        <div className="hour3" id="hour3">
             <div className="flex-one">
                 {props.city && props.country && props.time3h && (
                 <div className="weather-item">
