@@ -74,7 +74,7 @@ const Today = props => (
             </div>
         </div>
 
-            <div className="hour1" id="hour1">
+        <div className="hour1" id="hour1">
             <div className="flex-one">
                 {props.city && props.country && props.time1 && (
                 <div className="weather-item">
@@ -140,11 +140,11 @@ const Today = props => (
             </div>
         </div>
 
-             <div className="hour2" id="hour2">
+        <div className="hour2" id="hour2">
             <div className="flex-one">
-                {props.city && props.country && props.time2h && (
+                {props.city && props.country && props.time2 && (
                 <div className="weather-item">
-                    <p className="weather-value time"><Timestamp utc={false}time={ props.time2h } format='time' /></p>
+                    <p className="weather-value time"><Timestamp utc={false}time={ props.time2 } format='time' /></p>
                     <p className="weather-value city">{ props.city }</p>
                     <p className="weather-value country">{ props.country }</p>
                 </div>
@@ -204,13 +204,13 @@ const Today = props => (
                 )}
             
             </div>
-        </div>            
-   
+        </div>
+
         <div className="hour3" id="hour3">
             <div className="flex-one">
-                {props.city && props.country && props.time3h && (
+                {props.city && props.country && props.time3 && (
                 <div className="weather-item">
-                    <p className="weather-value time"><Timestamp utc={false}time={ props.time3h } format='time' /></p>
+                    <p className="weather-value time"><Timestamp utc={false}time={ props.time3 } format='time' /></p>
                     <p className="weather-value city">{ props.city }</p>
                     <p className="weather-value country">{ props.country }</p>
                 </div>
@@ -271,6 +271,8 @@ const Today = props => (
             
             </div>
         </div>
+
+
     </div>
 )
 
