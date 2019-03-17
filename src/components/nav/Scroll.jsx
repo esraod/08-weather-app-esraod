@@ -5,29 +5,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Scroll = props => (
 
 <div className="hourForm">
+{props.error && <div className="error">{props.error}</div>}
     <form className="hourOptions">
-    <a href='#hour'>
+    <a className="optionBtn" href='#hour'>
     
         <div>
-          <FontAwesomeIcon icon="circle" />
+          <FontAwesomeIcon  icon="circle" />
         </div>
  
       </a>
-      <a href='#hour1'>
+      <a className="optionBtn" href='#hour1'>
      
         <div>
           <FontAwesomeIcon icon="circle" />
         </div>
   
       </a>
-      <a href='#hour2'>
+      <a className="optionBtn" href='#hour2'>
      
         <div>
           <FontAwesomeIcon icon="circle" />
         </div>
 
       </a>
-      <a href='#hour3'>
+      <a className="optionBtn" href='#hour3'>
  
         <div>
           <FontAwesomeIcon icon="circle" />

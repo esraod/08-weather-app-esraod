@@ -1,18 +1,19 @@
 import React from "react";
 import WeatherIcon from "react-icons-weather";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Timestamp = require('react-timestamp');
 
 
 const Today = props => (
 
+  
     <div className="weather-content">
         <div className="hour" id="hour">
             <div className="flex-one">
                 {props.city && props.country && props.time && (
                 <div className="weather-item">
-                    <p className="weather-value time"><Timestamp utc={false}time={ props.time } format='time' /></p>
+                    <p className="weather-value time"><Timestamp utc={false} time={ props.time } format='time' /></p>
                     <p className="weather-value city">{ props.city }</p>
                     <p className="weather-value country">{ props.country }</p>
                 </div>
@@ -46,28 +47,35 @@ const Today = props => (
             </div>
 
             <div className="flex-three">
+            
+                       
+                      
                 {props.sunrise&& (
                     <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
-                    <div className="wind"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
+                    {/* <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "} */}
+                    <div name="owm" className=" wi wi-horizon-alt sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
                 </div>
                 )}
                 {props.wind && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
-                    <div className="wind">{ props.wind }m/s</div>
+                    {/* <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "} */}
+                    <div name="owm" className=" wi wi-windy sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.wind }m/s</div>
                 </div>
                 )}
                 {props.humidity && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="tint" />
-                    <div className="wind">{ props.humidity }% </div>
+                    {/* <FontAwesomeIcon className="icon-small-desc" icon="tint" /> */}
+                    <div name="owm" className=" wi wi-raindrop sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.humidity }% </div>
                 </div>
                 )}
                 {props.sunset&& (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />
-                    <div className="wind"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
+                    {/* <FontAwesomeIcon className="icon-small-desc" icon="sun" /> */}
+                    <div name="owm" className=" wi wi-horizon sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
                 </div>
                 )}
             
@@ -114,26 +122,26 @@ const Today = props => (
             <div className="flex-three">
                 {props.sunrise&& (
                     <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
-                    <div className="wind"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
+                    <div name="owm" className=" wi wi-horizon-alt sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
                 </div>
                 )}
                 {props.wind1h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
-                    <div className="wind">{ props.wind1h }m/s</div>
+                    <div name="owm" className=" wi wi-windy sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.wind1h }m/s</div>
                 </div>
                 )}
                 {props.humidity1h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="tint" />
-                    <div className="wind">{ props.humidity1h }% </div>
+                    <div name="owm" className=" wi wi-raindrop sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.humidity1h }% </div>
                 </div>
                 )}
                 {props.sunset&& (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />
-                    <div className="wind"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
+                                     <div name="owm" className=" wi wi-horizon sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
                 </div>
                 )}
             
@@ -180,26 +188,26 @@ const Today = props => (
             <div className="flex-three">
                 {props.sunrise&& (
                     <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
-                    <div className="wind"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
+                    <div name="owm" className=" wi wi-horizon-alt sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
                 </div>
                 )}
                 {props.wind2h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
-                    <div className="wind">{ props.wind2h }m/s</div>
+                    <div name="owm" className=" wi wi-windy sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.wind2h }m/s</div>
                 </div>
                 )}
                 {props.humidity2h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="tint" />
-                    <div className="wind">{ props.humidity2h }% </div>
+                    <div name="owm" className=" wi wi-raindrop sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.humidity2h }% </div>
                 </div>
                 )}
                 {props.sunset&& (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />
-                    <div className="wind"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
+                    <div name="owm" className=" wi wi-horizon sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
                 </div>
                 )}
             
@@ -246,26 +254,26 @@ const Today = props => (
             <div className="flex-three">
                 {props.sunrise&& (
                     <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />{" "}
-                    <div className="wind"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
+                    <div name="owm" className=" wi wi-horizon-alt sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunrise } format='time' /></div>
                 </div>
                 )}
                 {props.wind3h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="wind" />{" "}
-                    <div className="wind">{ props.wind3h }m/s</div>
+                    <div name="owm" className=" wi wi-windy sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.wind3h }m/s</div>
                 </div>
                 )}
                 {props.humidity3h && (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="tint" />
-                    <div className="wind">{ props.humidity3h }% </div>
+                    <div name="owm" className=" wi wi-raindrop sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value">{ props.humidity3h }% </div>
                 </div>
                 )}
                 {props.sunset&& (
                 <div className="weather-item-small">
-                    <FontAwesomeIcon className="icon-small-desc" icon="sun" />
-                    <div className="wind"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
+                    <div name="owm" className=" wi wi-horizon sunny" flip="horizontal" rotate="90" style={{ lineHeight: 1.2 }} > </div>
+                    <div className="desc-value"><Timestamp utc={false}time={ props.sunset } format='time' /></div>
                 </div>
                 )}
             

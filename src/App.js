@@ -18,7 +18,7 @@ class App extends Component {
 
   state = {
     city: undefined,
-    country: undefined,
+    country: "loading",
     temperature: undefined,
     icon: undefined,
     description: undefined,

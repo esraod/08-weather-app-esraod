@@ -77,9 +77,7 @@ const Week = props => (
                 <div className="week-temp">{ props.temperature5d }°C</div>
             </div> 
             )}
-         
-
-            
+        
         </div>
     </div>
 )
