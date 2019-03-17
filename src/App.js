@@ -20,7 +20,7 @@ class App extends Component {
       <div>
         <Search />
         <Today />
-        {/* <Week /> */}
+        <Week />
       </div>
     );
   }
