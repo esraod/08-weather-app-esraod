@@ -78,7 +78,7 @@ class App extends Component {
           () => {
             var lat = `${this.state.latitude}`;
             var lon = `${this.state.longitude}`;
-            let API_WEATHER = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+            let API_WEATHER = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
             fetch(API_WEATHER)
               .then(response => response.json())
               .then(rsp => {
@@ -161,7 +161,7 @@ class App extends Component {
           () => {
             var lat = `${this.state.latitude}`;
             var lon = `${this.state.longitude}`;
-            let API_WEATHER = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+            let API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
 
             fetch(API_WEATHER)
               .then(response => response.json())
@@ -195,9 +195,9 @@ class App extends Component {
     e.preventDefault();
     const city = e.target.elements.city.value;
     // const country = e.target.elements.country.value;
-    const getSun = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
+    const getSun = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
     const sun = await getSun.json();
-    const getDataBySearch = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
+    const getDataBySearch = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`);
     const data = await getDataBySearch.json();
     // if (city && country)
     // const getDataBySearch = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&appid=${API_KEY}&units=metric`);

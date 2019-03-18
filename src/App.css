@@ -7,6 +7,8 @@ html {
 body {
   font-family: helvetica neue, "Helvetica";
   background-color: #fff;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .searchForm {
@@ -411,9 +413,11 @@ and (-webkit-min-device-pixel-ratio: 2) {
   and (device-width : 375px) 
   and (device-height : 812px) 
   and (-webkit-device-pixel-ratio : 3) {
-  .flex-week{margin: 0px 3.5vw 40px 3.5vw; width: 93vw;}
-  .hourOptions{margin: 30px 20px 25px 20px;}
+  .flex-week{margin: 0px 3.5vw 52px 3.5vw; width: 93vw;}
+  .hourOptions{margin: 20px 20px 20px 20px;}
   .searchInput{margin: 20px 20px 20px 20px;}
+  .desc{margin:0;}
+  #n,#d{overflow-y: hidden;}
 }
   
 

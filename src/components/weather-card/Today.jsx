@@ -1,5 +1,6 @@
 import React from "react";
 import WeatherIcon from "react-icons-weather";
+
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Timestamp = require('react-timestamp');

@@ -3,7 +3,6 @@ import React from 'react';
 import WeatherIcon from "react-icons-weather";
 
 
-
 const Week = props => (
     <div className="forecast-content">
         <div className="flex-week">
