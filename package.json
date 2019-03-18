@@ -2,7 +2,7 @@
   "name": "08-weather-app-esraod",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://esraod.github.io/08-weather-app-esraod",
+  "homepage": "./",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.15",
     "@fortawesome/free-solid-svg-icons": "^5.7.2",
@@ -20,8 +20,6 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
