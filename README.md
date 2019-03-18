@@ -1,3 +1,2 @@
-Temporary link to the app -> [Temporary Weather App](https://eoktav.me/wawa/)
+Deplopyed Weather App [Weather App] -> (https://eoktav.me/weather/)
 ---
-**Have issues with the deployment: weather icons, etc etc** *(to be fixed asap)*
