@@ -66,11 +66,10 @@ class App extends Component {
 
   componentDidMount() {  
     this.getLocation(); 
-    this.getLocationSun();
   }
 
 
-  getLocation = async (e) => {
+  getLocation = (e) => {
     this.watchId = navigator.geolocation.getCurrentPosition(
       position => {
         this.setState({
@@ -78,120 +77,118 @@ class App extends Component {
           longitude: position.coords.longitude,
           error: null
         },
-          () => {
+         async () => {
             var lat = `${this.state.latitude}`;
             var lon = `${this.state.longitude}`;
-            let API_WEATHER = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
-            fetch(API_WEATHER)
-              .then(response => response.json())
-              .then(rsp => {
-                console.log(rsp);
-                this.setState({
-                  city: rsp.city.name,
-                  country: rsp.city.country,
-                  temperature: Math.floor(rsp.list[0].main.temp).toFixed(0),
-                  time: rsp.list[0].dt,
-                  icon: rsp.list[0].weather[0].id,
-                  description: rsp.list[0].weather[0].description,
-                  humidity: rsp.list[0].main.humidity,
-                  wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
-                  dayorn: rsp.list[0].sys.pod,
+            const API_WEATHER = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+            const rsp = await API_WEATHER.json()
+            const API_SUN = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`);
+            const rspsun = await API_SUN.json()
+           
+            if (lat && lon) {
+              this.setState({
+                city: rsp.city.name,
+                country: rsp.city.country,
+                temperature: Math.floor(rsp.list[0].main.temp).toFixed(0),
+                time: rsp.list[0].dt,
+                icon: rsp.list[0].weather[0].id,
+                description: rsp.list[0].weather[0].description,
+                humidity: rsp.list[0].main.humidity,
+                wind: Math.floor(rsp.list[0].wind.speed).toFixed(0),
+                dayorn: rsp.list[0].sys.pod,
 
-                  temperature1d: Math.floor(rsp.list[6].main.temp).toFixed(0),
-                  temperature2d: Math.floor(rsp.list[14].main.temp).toFixed(0),
-                  temperature3d: Math.floor(rsp.list[22].main.temp).toFixed(0),
-                  temperature4d: Math.floor(rsp.list[30].main.temp).toFixed(0),
-                  temperature5d: Math.floor(rsp.list[38].main.temp).toFixed(0),
-                  icon1d: rsp.list[6].weather[0].id,
-                  icon2d: rsp.list[14].weather[0].id,
-                  icon3d: rsp.list[22].weather[0].id,
-                  icon4d: rsp.list[30].weather[0].id,
-                  icon5d: rsp.list[38].weather[0].id,
-                  wday1: moment.unix(rsp.list[6].dt).format('dd'),
-                  wday2: moment.unix(rsp.list[14].dt).format('dd'),
-                  wday3: moment.unix(rsp.list[22].dt).format('dd'),
-                  wday4: moment.unix(rsp.list[30].dt).format('dd'),
-                  wday5: moment.unix(rsp.list[38].dt).format('dd'),
+                temperature1d: Math.floor(rsp.list[6].main.temp).toFixed(0),
+                temperature2d: Math.floor(rsp.list[14].main.temp).toFixed(0),
+                temperature3d: Math.floor(rsp.list[22].main.temp).toFixed(0),
+                temperature4d: Math.floor(rsp.list[30].main.temp).toFixed(0),
+                temperature5d: Math.floor(rsp.list[38].main.temp).toFixed(0),
+                icon1d: rsp.list[6].weather[0].id,
+                icon2d: rsp.list[14].weather[0].id,
+                icon3d: rsp.list[22].weather[0].id,
+                icon4d: rsp.list[30].weather[0].id,
+                icon5d: rsp.list[38].weather[0].id,
+                wday1: moment.unix(rsp.list[6].dt).format('dd'),
+                wday2: moment.unix(rsp.list[14].dt).format('dd'),
+                wday3: moment.unix(rsp.list[22].dt).format('dd'),
+                wday4: moment.unix(rsp.list[30].dt).format('dd'),
+                wday5: moment.unix(rsp.list[38].dt).format('dd'),
 
-                  wind1h: rsp.list[1].wind.speed,
-                  wind2h: rsp.list[2].wind.speed,
-                  wind3h: rsp.list[4].wind.speed,
+                wind1h: rsp.list[1].wind.speed,
+                wind2h: rsp.list[2].wind.speed,
+                wind3h: rsp.list[4].wind.speed,
 
-                  humidity1h: rsp.list[1].main.humidity,
-                  humidity2h: rsp.list[2].main.humidity,
-                  humidity3h: rsp.list[4].main.humidity,
+                humidity1h: rsp.list[1].main.humidity,
+                humidity2h: rsp.list[2].main.humidity,
+                humidity3h: rsp.list[4].main.humidity,
 
-                  icon1h: rsp.list[1].weather[0].id,
-                  icon2h: rsp.list[2].weather[0].id,
-                  icon3h: rsp.list[3].weather[0].id,
+                icon1h: rsp.list[1].weather[0].id,
+                icon2h: rsp.list[2].weather[0].id,
+                icon3h: rsp.list[3].weather[0].id,
 
-                  time1: rsp.list[1].dt,
-                  time2: rsp.list[2].dt,
-                  time3: rsp.list[3].dt,
+                time1: rsp.list[1].dt,
+                time2: rsp.list[2].dt,
+                time3: rsp.list[3].dt,
 
-                  temperature1h: Math.floor(rsp.list[1].main.temp),
-                  temperature2h: Math.floor(rsp.list[2].main.temp),
-                  temperature3h: Math.floor(rsp.list[3].main.temp),
-                  description1h: rsp.list[1].weather[0].description,
-                  description2h: rsp.list[2].weather[0].description,
-                  description3h: rsp.list[3].weather[0].description,
-                  error: ""
-                });
-              }).catch(error => {
-                console.log(error);
+                temperature1h: Math.floor(rsp.list[1].main.temp),
+                temperature2h: Math.floor(rsp.list[2].main.temp),
+                temperature3h: Math.floor(rsp.list[3].main.temp),
+                description1h: rsp.list[1].weather[0].description,
+                description2h: rsp.list[2].weather[0].description,
+                description3h: rsp.list[3].weather[0].description,
+                sunrise: rspsun.sys.sunrise,
+                sunset: rspsun.sys.sunset,
+                error: ""
               });
-          });
-      },
-      error => this.setState({ error: "Could not find your location, Try seaching." }),
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000,
-        distanceFilter: 5
-      }
-    );
-  } 
+            } else {
+              this.setState({
+                city: undefined,
+                country: undefined,
+                temperature: undefined,
+                icon: undefined,
+                description: undefined,
+                humidity: undefined,
+                wind: undefined,
+                sunrise: undefined,
+                sunset: undefined,
+                time: undefined,
+                temperature1d: undefined,
+                temperature2d: undefined,
+                temperature3d: undefined,
+                temperature4d: undefined,
+                temperature5d: undefined,
+                icon1d: undefined,
+                icon2d: undefined,
+                icon3d: undefined,
+                icon4d: undefined,
+                icon5d: undefined,
+                time1: undefined,
+                time2: undefined,
+                time3: undefined,
 
-  getLocationSun = async (e) => {
+                dayorn: undefined,
+                icon1h: undefined,
+                icon2h: undefined,
+                icon3h: undefined,
 
-    this.watchId = navigator.geolocation.getCurrentPosition(
-      position => {
-        this.setState({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          error: null
-        },
-          () => {
-            var lat = `${this.state.latitude}`;
-            var lon = `${this.state.longitude}`;
-            let API_WEATHER = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`;
+                humidity1h: undefined,
+                humidity2h: undefined,
+                humidity3h: undefined,
 
-            fetch(API_WEATHER)
-              .then(response => response.json())
-              .then(rsp => {
-                console.log(rsp);
-                console.log(rsp.forecast);
-                this.setState({
-                  sunrise: rsp.sys.sunrise,
-                  sunset: rsp.sys.sunset,
-                });
-              })
-              .catch(error => {
-                console.log(error);
+                wind1h: undefined,
+                wind2h: undefined,
+                wind3h: undefined,
+                temperature1h: undefined,
+                temperature2h: undefined,
+                temperature3h: undefined,
+                description1h: undefined,
+                description2h: undefined,
+                description3h: undefined,
+
+                error: "Could not find your location, Try seaching."
               });
-
-          });
-      },
-
-
-      error => this.setState({ error: error.message }),
-      {
-        enableHighAccuracy: true,
-        timeout: 20000,
-        maximumAge: 1000,
-        distanceFilter: 5
-      }
-    );
+            }
+          })
+      })
   }
 
   getWeather = async (e) => {
